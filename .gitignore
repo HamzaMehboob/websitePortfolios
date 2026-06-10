@@ -8,6 +8,7 @@ dist
 out
 build
 .turbo
+github-pages-dist
 
 # Env
 .env

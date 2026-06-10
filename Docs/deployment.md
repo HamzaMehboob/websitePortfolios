@@ -6,7 +6,8 @@
 | Pulse SaaS | `apps/saas-dashboard` | Vercel | `saas.yourname.dev` |
 | Atelier North | `apps/agency` | Vercel | `agency.yourname.dev` |
 | Forma Shop | `apps/ecommerce` | Vercel | `shop.yourname.dev` |
-| Habit | `apps/flutter-habit` | GitHub Pages (CI) | `habit.yourname.dev` |
+| **Portfolio hub + all demos** | `github-pages/` + all apps | GitHub Pages (CI) | `yourname.github.io/REPO_NAME/` |
+| Habit (subpath) | `apps/flutter-habit` | GitHub Pages → `/habit/` | `…/REPO_NAME/habit/` |
 | Surface | `apps/editorial` | Vercel | `surface.yourname.dev` |
 
 ## Automatic deploy on `git push`

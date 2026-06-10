@@ -68,9 +68,9 @@ flutter run -d chrome --dart-define=HUB_URL=http://localhost:3000
 
 ## Deploy to production
 
-**One-time setup:** [docs/github-deploy-setup.md](./docs/github-deploy-setup.md) (Vercel + GitHub secrets + Pages).
+**GitHub Pages (default):** Push to `main` deploys a portfolio hub at `https://YOUR_USER.github.io/REPO_NAME/` with all five demos at subpaths (`/pulse/`, `/agency/`, `/forma/`, `/habit/`, `/surface/`). Enable **Settings → Pages → GitHub Actions**.
 
-After setup, every push to `main` runs CI and deploys all six sites automatically.
+**Vercel (optional):** For the full Next.js hub with case studies, set up five Vercel projects — see [docs/github-deploy-setup.md](./docs/github-deploy-setup.md).
 
 ## Navigation architecture
 

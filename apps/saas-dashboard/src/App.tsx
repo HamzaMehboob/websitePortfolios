@@ -6,9 +6,11 @@ import { CampaignsPage } from "@/pages/CampaignsPage";
 import { OverviewPage } from "@/pages/OverviewPage";
 import { SettingsPage } from "@/pages/SettingsPage";
 
+const basename = import.meta.env.BASE_URL.replace(/\/$/, "") || "/";
+
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <Routes>
         <Route element={<DashboardLayout />}>
           <Route index element={<OverviewPage />} />

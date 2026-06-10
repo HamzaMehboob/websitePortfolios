@@ -79,37 +79,42 @@ jobs:
           working-directory: apps/editorial
           vercel-args: '--prod'
 
-  build-habit:
-    name: Build Habit (GitHub Pages)
+  build-github-pages:
+    name: Build GitHub Pages (hub + all demos)
     runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=4096
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
 
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
           cache: true
 
-      - name: Build Flutter web
-        working-directory: apps/flutter-habit
+      - name: Build and assemble site
         env:
-          HUB_URL: ${{ vars.HUB_URL }}
-          HABIT_BASE_HREF: /${{ github.event.repository.name }}/
-        run: |
-          flutter create . --platforms=web --project-name habit
-          flutter pub get
-          flutter build web --release --no-tree-shake-icons --no-wasm-dry-run \
-            --base-href "${HABIT_BASE_HREF}" \
-            --dart-define=HUB_URL="${HUB_URL:-https://example.com}"
-          touch build/web/.nojekyll
+          GITHUB_PAGES_REPO: ${{ github.event.repository.name }}
+          GITHUB_PAGES_ORIGIN: https://${{ github.repository_owner }}.github.io
+          HUB_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+        run: bash scripts/build-github-pages.sh
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: apps/flutter-habit/build/web
+          path: github-pages-dist
 
-  deploy-habit:
-    name: Deploy Habit (GitHub Pages)
-    needs: build-habit
+  deploy-github-pages:
+    name: Deploy GitHub Pages
+    needs: build-github-pages
     runs-on: ubuntu-latest
     permissions:
       contents: read
