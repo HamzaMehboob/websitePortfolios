@@ -93,8 +93,9 @@ Redeploy each spoke after setting env vars.
 ### 6. GitHub Pages for Habit
 
 1. GitHub repo → **Settings → Pages**
-2. **Build and deployment** → Source: **GitHub Actions**
-3. After first push to `main`, the `deploy-habit` job publishes `apps/flutter-habit/build/web`.
+2. **Build and deployment** → Source: **GitHub Actions** (not “Deploy from a branch” — branch mode runs Jekyll on the monorepo and fails)
+3. After first push to `main`, `build-habit` + `deploy-habit` publish `apps/flutter-habit/build/web`.
+4. Repo root includes `.nojekyll` so GitHub does not try to Jekyll-process the monorepo.
 
 For a custom domain (`habit.yourname.dev`), add it under Pages settings and set `HABIT_BASE_HREF=/`.
 
@@ -126,3 +127,4 @@ Vercel will **also** auto-deploy on push if the GitHub app is installed — you 
 | Habit blank page on GitHub Pages | Default base href is `/websitePortfolios/`; override with `HABIT_BASE_HREF` var if needed |
 | Monorepo install fails | Ensure Root Directory is `apps/<app>`, not repo root |
 | GitHub Pages deploy fails | Enable **Settings → Pages → Source: GitHub Actions** |
+| `pages build and deployment` / Jekyll `build` fails | Switch Pages source from **branch** to **GitHub Actions**; keep root `.nojekyll` in the repo |

@@ -79,16 +79,9 @@ jobs:
           working-directory: apps/editorial
           vercel-args: '--prod'
 
-  deploy-habit:
-    name: Deploy Habit (GitHub Pages)
+  build-habit:
+    name: Build Habit (GitHub Pages)
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -108,10 +101,23 @@ jobs:
           flutter build web --release --no-tree-shake-icons --no-wasm-dry-run \
             --base-href "${HABIT_BASE_HREF}" \
             --dart-define=HUB_URL="${HUB_URL:-https://example.com}"
+          touch build/web/.nojekyll
 
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/flutter-habit/build/web
 
+  deploy-habit:
+    name: Deploy Habit (GitHub Pages)
+    needs: build-habit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
         uses: actions/deploy-pages@v4
