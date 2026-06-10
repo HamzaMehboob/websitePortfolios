@@ -59,4 +59,4 @@ jobs:
         run: |
           flutter create . --platforms=web --project-name habit
           flutter pub get
-          flutter build web --release --dart-define=HUB_URL=https://example.com
+          flutter build web --release --no-tree-shake-icons --dart-define=HUB_URL=https://example.com
