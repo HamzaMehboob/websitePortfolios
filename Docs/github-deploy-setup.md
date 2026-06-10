@@ -116,11 +116,11 @@ Vercel will **also** auto-deploy on push if the GitHub app is installed — you 
 | Issue | Fix |
 |-------|-----|
 | Deploy workflow shows **instant failure**, 0 jobs | Invalid workflow YAML — do not use `secrets` in job `if:` conditions |
-| CI fails on `editorial#build` | Use Astro 6–compatible `@astrojs/mdx@6` + `@tailwindcss/vite` (not `@astrojs/tailwind@6`) |
+| CI fails on `editorial#build` | Editorial uses **Astro 5** + `@astrojs/tailwind@5` + Tailwind 3 (Astro 6 + lightningcss breaks Linux CI) |
 | Deploy workflow fails on Vercel steps (instant) | Add all `VERCEL_*` secrets, then set variable `VERCEL_DEPLOY_ENABLED=true` |
 | Vercel jobs skipped | Expected until `VERCEL_DEPLOY_ENABLED=true` and secrets are configured |
-| CI fails on `editorial#build` (instant) | Astro 6 uses PostCSS (not lightningcss): `vite.css.transformer=postcss`, Tailwind 3 via `postcss.config.cjs` |
-| CI/deploy fails on Flutter build | Build uses `--no-wasm-dry-run`; onboarding is in-memory (no `shared_preferences` on web CI) |
+| CI/deploy fails on Flutter build | Use `snackBarTheme` (not `snackBarBehavior` on `ThemeData`); build with `--no-wasm-dry-run --no-tree-shake-icons` |
+| Flutter `snackBarBehavior` compile error | Set `snackBarTheme: SnackBarThemeData(behavior: SnackBarBehavior.floating)` in `theme.dart` |
 | Hub demos show “Coming soon” | Set `NEXT_PUBLIC_DEMO_*_URL` on hub Vercel project and redeploy |
 | Pulse 404 on refresh | `vercel.json` includes SPA rewrites — redeploy pulse project |
 | Habit blank page on GitHub Pages | Default base href is `/websitePortfolios/`; override with `HABIT_BASE_HREF` var if needed |

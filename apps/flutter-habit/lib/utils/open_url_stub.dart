@@ -1,1 +1,0 @@
-void openUrl(String url) {}

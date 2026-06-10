@@ -4,7 +4,11 @@ Wellness habit tracker — **not** part of the Turborepo JS pipeline.
 
 ## Prerequisites
 
-- [Flutter SDK](https://docs.flutter.dev/get-started/install) 3.x with web enabled
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) 3.22+ with web enabled
+
+## Dependencies
+
+Pinned in `pubspec.yaml` for CI stability: `flutter_riverpod`, `go_router`, `url_launcher`. Run `flutter pub get` after cloning; commit `pubspec.lock` once generated locally for reproducible builds.
 
 ## Commands
 
