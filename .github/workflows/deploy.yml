@@ -105,7 +105,7 @@ jobs:
         run: |
           flutter create . --platforms=web --project-name habit
           flutter pub get
-          flutter build web --release --no-tree-shake-icons \
+          flutter build web --release --no-tree-shake-icons --no-wasm-dry-run \
             --base-href "${HABIT_BASE_HREF}" \
             --dart-define=HUB_URL="${HUB_URL:-https://example.com}"
 
