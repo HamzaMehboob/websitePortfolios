@@ -60,8 +60,9 @@ In GitHub → **Settings → Secrets and variables → Actions**:
 
 | Variable | Example | Used by |
 |----------|---------|---------|
+| `VERCEL_DEPLOY_ENABLED` | `true` | Set to `true` only after all `VERCEL_*` secrets exist; otherwise Vercel jobs are skipped |
 | `HUB_URL` | `https://your-hub.vercel.app` | Habit Flutter build |
-| `HABIT_BASE_HREF` | `/` or `/WebsitePortfolios/` | Flutter web base path |
+| `HABIT_BASE_HREF` | `/` or `/websitePortfolios/` | Flutter web base path (defaults to `/<repo-name>/` in Actions) |
 
 ### 4. Hub environment variables (Vercel)
 
@@ -116,7 +117,10 @@ Vercel will **also** auto-deploy on push if the GitHub app is installed — you 
 |-------|-----|
 | Deploy workflow shows **instant failure**, 0 jobs | Invalid workflow YAML — do not use `secrets` in job `if:` conditions |
 | CI fails on `editorial#build` | Use Astro 6–compatible `@astrojs/mdx@6` + `@tailwindcss/vite` (not `@astrojs/tailwind@6`) |
-| Deploy workflow fails on Vercel steps | Add all `VERCEL_*` secrets listed above |
+| Deploy workflow fails on Vercel steps (instant) | Add all `VERCEL_*` secrets, then set variable `VERCEL_DEPLOY_ENABLED=true` |
+| Vercel jobs skipped | Expected until `VERCEL_DEPLOY_ENABLED=true` and secrets are configured |
+| CI fails on `editorial#build` | Editorial uses `@tailwindcss/vite` + `lightningcss`; fonts load via `<link>` not CSS `@import` |
+| CI/deploy fails on Flutter build | Run `flutter create . --platforms=web` once locally, or rely on the CI scaffold step |
 | Hub demos show “Coming soon” | Set `NEXT_PUBLIC_DEMO_*_URL` on hub Vercel project and redeploy |
 | Pulse 404 on refresh | `vercel.json` includes SPA rewrites — redeploy pulse project |
 | Habit blank page on GitHub Pages | Default base href is `/websitePortfolios/`; override with `HABIT_BASE_HREF` var if needed |
