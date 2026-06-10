@@ -103,9 +103,9 @@ jobs:
           HUB_URL: ${{ vars.HUB_URL }}
           HABIT_BASE_HREF: /${{ github.event.repository.name }}/
         run: |
+          flutter create . --platforms=web --project-name habit
           flutter pub get
           flutter build web --release \
-            --no-wasm-dry-run \
             --base-href "${HABIT_BASE_HREF}" \
             --dart-define=HUB_URL="${HUB_URL:-https://example.com}"
 

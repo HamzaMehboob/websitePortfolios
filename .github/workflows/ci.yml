@@ -35,7 +35,8 @@ jobs:
         run: corepack enable && pnpm install --frozen-lockfile
 
       - name: Build editorial (isolated)
-        run: pnpm --filter editorial run build
+        working-directory: apps/editorial
+        run: pnpm exec astro build
 
       - name: Build remaining portfolio apps
         run: pnpm turbo build --filter=hub --filter=saas-dashboard --filter=agency --filter=ecommerce --concurrency=2
@@ -53,10 +54,9 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Build Habit web
+      - name: Scaffold and build Habit web
         working-directory: apps/flutter-habit
         run: |
+          flutter create . --platforms=web --project-name habit
           flutter pub get
-          flutter build web --release \
-            --no-wasm-dry-run \
-            --dart-define=HUB_URL=https://example.com
+          flutter build web --release --dart-define=HUB_URL=https://example.com
