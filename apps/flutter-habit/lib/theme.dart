@@ -13,6 +13,6 @@ ThemeData buildHabitTheme({required Brightness brightness}) {
     colorScheme: colorScheme,
     scaffoldBackgroundColor: isDark ? const Color(0xFF171717) : const Color(0xFFFAFAFA),
     appBarTheme: const AppBarTheme(centerTitle: false, elevation: 0),
-    snackBarBehavior: SnackBarBehavior.floating,
+    snackBarTheme: const SnackBarThemeData(behavior: SnackBarBehavior.floating),
   );
 }
