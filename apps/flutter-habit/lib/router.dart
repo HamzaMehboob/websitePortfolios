@@ -9,14 +9,31 @@ import 'package:habit/screens/settings_screen.dart';
 import 'package:habit/screens/stats_screen.dart';
 import 'package:habit/shell/app_shell.dart';
 
+class _RouterRefresh extends ChangeNotifier {
+  _RouterRefresh(this._ref) {
+    _ref.listen(onboardingCompleteProvider, (_, __) => notifyListeners());
+  }
+
+  final Ref _ref;
+}
+
+final _routerRefreshProvider = Provider<_RouterRefresh>((ref) {
+  final notifier = _RouterRefresh(ref);
+  ref.onDispose(notifier.dispose);
+  return notifier;
+});
+
 final goRouterProvider = Provider<GoRouter>((ref) {
-  final onboarding = ref.watch(onboardingCompleteProvider);
-  final complete = onboarding.value ?? false;
+  final refresh = ref.watch(_routerRefreshProvider);
 
   return GoRouter(
     initialLocation: '/',
+    refreshListenable: refresh,
     redirect: (context, state) {
+      final onboarding = ref.read(onboardingCompleteProvider);
       if (onboarding.isLoading) return null;
+
+      final complete = onboarding.value ?? false;
       final onOnboarding = state.matchedLocation == '/onboarding';
       if (!complete && !onOnboarding) return '/onboarding';
       if (complete && onOnboarding) return '/';
