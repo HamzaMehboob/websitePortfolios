@@ -136,6 +136,7 @@ Vercel will **also** auto-deploy on push if the GitHub app is installed — you 
 | Pulse 404 on refresh | `vercel.json` includes SPA rewrites — redeploy pulse project |
 | GitHub Pages root shows Habit only (old deploy) | Redeploy after the unified `build-github-pages` workflow — hub is at `/`, Habit at `/habit/` |
 | Demo subpath 404 on GitHub Pages | Ensure Pages source is **GitHub Actions**, not a branch; check Actions log for `build-github-pages` |
+| Forma build fails on GitHub Pages | `opengraph-image.tsx` is incompatible with static export — build script temporarily moves it aside for `apps/ecommerce` |
 | Monorepo install fails | Ensure Root Directory is `apps/<app>`, not repo root |
 | GitHub Pages deploy fails | Enable **Settings → Pages → Source: GitHub Actions** |
 | `pages build and deployment` / Jekyll `build` fails | Switch Pages source from **branch** to **GitHub Actions**; keep root `.nojekyll` in the repo |

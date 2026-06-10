@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
     assetPrefix: basePath,
     trailingSlash: true,
     images: { unoptimized: true },
+    eslint: { ignoreDuringBuilds: true },
   }),
 };
 

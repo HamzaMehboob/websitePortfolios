@@ -35,6 +35,12 @@ restore_og_image() {
   fi
 }
 
+cleanup_og_images() {
+  restore_og_image agency
+  restore_og_image ecommerce
+}
+trap cleanup_og_images EXIT
+
 export GITHUB_PAGES=true
 export GITHUB_PAGES_REPO="$REPO"
 export GITHUB_PAGES_ORIGIN="$ORIGIN"
@@ -54,9 +60,9 @@ restore_og_image agency
 cp -r apps/agency/out/. "$OUT/agency/"
 
 echo "→ Building Forma Shop (Next.js static export)…"
-disable_og_image forma
+disable_og_image ecommerce
 pnpm --filter ecommerce build
-restore_og_image forma
+restore_og_image ecommerce
 cp -r apps/ecommerce/out/. "$OUT/forma/"
 
 echo "→ Building Surface (Astro)…"

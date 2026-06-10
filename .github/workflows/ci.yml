@@ -56,7 +56,49 @@ jobs:
 
       - name: Scaffold and build Habit web
         working-directory: apps/flutter-habit
+        env:
+          HUB_URL: https://example.com
         run: |
           flutter create . --platforms=web --project-name habit
           flutter pub get
-          flutter build web --release --no-tree-shake-icons --no-wasm-dry-run --dart-define=HUB_URL=https://example.com
+          flutter build web --release --no-tree-shake-icons --no-wasm-dry-run \
+            --base-href "/WebsitePortfolios/habit/" \
+            --dart-define=HUB_URL="${HUB_URL}"
+
+  build-github-pages:
+    name: Verify GitHub Pages bundle
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=4096
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Build GitHub Pages artifact
+        env:
+          GITHUB_PAGES_REPO: WebsitePortfolios
+          GITHUB_PAGES_ORIGIN: https://example.github.io
+          HUB_URL: https://example.github.io/WebsitePortfolios/
+        run: bash scripts/build-github-pages.sh
+
+      - name: Assert hub and demo paths exist
+        run: |
+          test -f github-pages-dist/index.html
+          test -f github-pages-dist/pulse/index.html
+          test -f github-pages-dist/agency/index.html
+          test -f github-pages-dist/forma/index.html
+          test -f github-pages-dist/habit/index.html
+          test -f github-pages-dist/surface/index.html
