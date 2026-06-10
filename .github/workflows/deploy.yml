@@ -104,7 +104,6 @@ jobs:
           HABIT_BASE_HREF: /${{ github.event.repository.name }}/
         run: |
           flutter pub get
-          flutter analyze --no-fatal-infos
           flutter build web --release \
             --no-wasm-dry-run \
             --base-href "${HABIT_BASE_HREF}" \

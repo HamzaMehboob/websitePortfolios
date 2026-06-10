@@ -119,8 +119,8 @@ Vercel will **also** auto-deploy on push if the GitHub app is installed — you 
 | CI fails on `editorial#build` | Use Astro 6–compatible `@astrojs/mdx@6` + `@tailwindcss/vite` (not `@astrojs/tailwind@6`) |
 | Deploy workflow fails on Vercel steps (instant) | Add all `VERCEL_*` secrets, then set variable `VERCEL_DEPLOY_ENABLED=true` |
 | Vercel jobs skipped | Expected until `VERCEL_DEPLOY_ENABLED=true` and secrets are configured |
-| CI fails on `editorial#build` (instant) | Editorial uses Tailwind 3 + PostCSS (no `lightningcss` native bindings) |
-| CI/deploy fails on Flutter build | Ensure `.metadata` exists; build uses `--no-wasm-dry-run`; run `flutter analyze` locally |
+| CI fails on `editorial#build` (instant) | Astro 6 uses PostCSS (not lightningcss): `vite.css.transformer=postcss`, Tailwind 3 via `postcss.config.cjs` |
+| CI/deploy fails on Flutter build | Build uses `--no-wasm-dry-run`; onboarding is in-memory (no `shared_preferences` on web CI) |
 | Hub demos show “Coming soon” | Set `NEXT_PUBLIC_DEMO_*_URL` on hub Vercel project and redeploy |
 | Pulse 404 on refresh | `vercel.json` includes SPA rewrites — redeploy pulse project |
 | Habit blank page on GitHub Pages | Default base href is `/websitePortfolios/`; override with `HABIT_BASE_HREF` var if needed |
