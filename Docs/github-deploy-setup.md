@@ -114,8 +114,11 @@ Vercel will **also** auto-deploy on push if the GitHub app is installed — you 
 
 | Issue | Fix |
 |-------|-----|
-| Deploy workflow skipped / failed on secrets | Add all `VERCEL_*` secrets listed above |
+| Deploy workflow shows **instant failure**, 0 jobs | Invalid workflow YAML — do not use `secrets` in job `if:` conditions |
+| CI fails on `editorial#build` | Use Astro 6–compatible `@astrojs/mdx@6` + `@tailwindcss/vite` (not `@astrojs/tailwind@6`) |
+| Deploy workflow fails on Vercel steps | Add all `VERCEL_*` secrets listed above |
 | Hub demos show “Coming soon” | Set `NEXT_PUBLIC_DEMO_*_URL` on hub Vercel project and redeploy |
 | Pulse 404 on refresh | `vercel.json` includes SPA rewrites — redeploy pulse project |
-| Habit blank page on GitHub Pages | Set `HABIT_BASE_HREF` to repo path (e.g. `/WebsitePortfolios/`) |
+| Habit blank page on GitHub Pages | Default base href is `/websitePortfolios/`; override with `HABIT_BASE_HREF` var if needed |
 | Monorepo install fails | Ensure Root Directory is `apps/<app>`, not repo root |
+| GitHub Pages deploy fails | Enable **Settings → Pages → Source: GitHub Actions** |

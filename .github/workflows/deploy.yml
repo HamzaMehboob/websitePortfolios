@@ -8,46 +8,71 @@ concurrency:
   group: deploy-production
   cancel-in-progress: false
 
-env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-
 jobs:
-  deploy-vercel:
-    name: Deploy ${{ matrix.name }}
-    if: ${{ secrets.VERCEL_TOKEN != '' && secrets.VERCEL_ORG_ID != '' }}
+  deploy-hub:
+    name: Deploy Hub
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - name: Hub
-            directory: apps/hub
-            project_id_secret: VERCEL_PROJECT_ID_HUB
-          - name: Pulse SaaS
-            directory: apps/saas-dashboard
-            project_id_secret: VERCEL_PROJECT_ID_PULSE
-          - name: Atelier North
-            directory: apps/agency
-            project_id_secret: VERCEL_PROJECT_ID_AGENCY
-          - name: Forma Shop
-            directory: apps/ecommerce
-            project_id_secret: VERCEL_PROJECT_ID_ECOMMERCE
-          - name: Surface
-            directory: apps/editorial
-            project_id_secret: VERCEL_PROJECT_ID_SURFACE
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
+      - uses: actions/checkout@v4
+      - uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets[matrix.project_id_secret] }}
-          working-directory: ${{ matrix.directory }}
-          vercel-args: "--prod"
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_HUB }}
+          working-directory: apps/hub
+          vercel-args: '--prod'
+
+  deploy-pulse:
+    name: Deploy Pulse SaaS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_PULSE }}
+          working-directory: apps/saas-dashboard
+          vercel-args: '--prod'
+
+  deploy-agency:
+    name: Deploy Atelier North
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_AGENCY }}
+          working-directory: apps/agency
+          vercel-args: '--prod'
+
+  deploy-forma:
+    name: Deploy Forma Shop
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_ECOMMERCE }}
+          working-directory: apps/ecommerce
+          vercel-args: '--prod'
+
+  deploy-surface:
+    name: Deploy Surface
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_SURFACE }}
+          working-directory: apps/editorial
+          vercel-args: '--prod'
 
   deploy-habit:
     name: Deploy Habit (GitHub Pages)
@@ -60,11 +85,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2
         with:
           channel: stable
           cache: true
@@ -72,19 +95,17 @@ jobs:
       - name: Build Flutter web
         working-directory: apps/flutter-habit
         env:
-          HUB_URL: ${{ vars.HUB_URL || 'https://example.com' }}
-          BASE_HREF: ${{ vars.HABIT_BASE_HREF || '/' }}
+          HUB_URL: ${{ vars.HUB_URL }}
+          HABIT_BASE_HREF: /${{ github.event.repository.name }}/
         run: |
           flutter pub get
           flutter build web --release \
-            --base-href "$BASE_HREF" \
-            --dart-define=HUB_URL="$HUB_URL"
+            --base-href "${HABIT_BASE_HREF}" \
+            --dart-define=HUB_URL="${HUB_URL:-https://example.com}"
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/flutter-habit/build/web
 
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4
