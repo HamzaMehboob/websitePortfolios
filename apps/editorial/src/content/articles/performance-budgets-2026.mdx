@@ -1,0 +1,35 @@
+---
+title: "Performance Budgets in 2026"
+description: "Practical budgets for editorial sites that still ship rich typography and imagery."
+pubDate: 2026-04-02
+author: Jordan Lee
+authorSlug: jordan-lee
+tags: [performance, frontend]
+heroImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=750&fit=crop"
+featured: true
+---
+
+Performance is a UX feature. Readers abandon long-form content when layout shifts and hero images block interaction.
+
+## Set budgets per route type
+
+| Route | LCP target | JS budget |
+|-------|------------|-----------|
+| Home | < 2.0s | 80 KB |
+| Article | < 2.5s | 40 KB |
+
+## Images are the story
+
+Editorial sites live on photography. Use responsive `srcset`, lazy-load below the fold, and reserve aspect-ratio boxes to kill CLS.
+
+### Font loading
+
+Subset display faces. Preload only the weights used above the fold. System-ui fallbacks should match metrics closely enough to avoid jarring swaps.
+
+## Islands, not waterfalls
+
+Hydrate reading affordances — progress, TOC highlights — as small islands. Keep article body static HTML for crawlability and speed.
+
+## What to measure weekly
+
+Core Web Vitals at p75, plus **interaction readiness** on mobile mid-tier devices. Lab scores are direction; field data is truth.

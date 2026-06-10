@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const articles = (await getCollection('articles')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const byYear = articles.reduce<Record<string, typeof articles>>((acc, article) => {
+  const year = article.data.pubDate.getFullYear().toString();
+  (acc[year] ??= []).push(article);
+  return acc;
+}, {});
+const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<BaseLayout title="Archive">
+  <section class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="font-serif text-4xl font-semibold">Archive</h1>
+    <p class="mt-2 text-stone-600">All issues by year</p>
+
+    {
+      years.map((year) => (
+        <div class="mt-10">
+          <h2 class="font-serif text-2xl font-semibold">{year}</h2>
+          <ul class="mt-4 divide-y divide-stone-200 border-y border-stone-200">
+            {byYear[year].map((article) => (
+              <li class="py-4">
+                <a href={`/articles/${article.id}`} class="group block">
+                  <p class="font-medium group-hover:text-accent">{article.data.title}</p>
+                  <p class="text-sm text-stone-500">
+                    {article.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                    · {article.data.author}
+                  </p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </section>
+</BaseLayout>

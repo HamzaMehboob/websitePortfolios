@@ -1,0 +1,16 @@
+---
+import HubBackLink from './HubBackLink.astro';
+---
+
+<header class="border-b border-stone-200 bg-paper/90 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+    <div class="flex items-center gap-6">
+      <a href="/" class="font-serif text-2xl font-semibold tracking-tight text-ink">Surface</a>
+      <nav class="hidden gap-5 text-sm text-stone-600 sm:flex" aria-label="Primary">
+        <a class="hover:text-ink" href="/">Home</a>
+        <a class="hover:text-ink" href="/archive">Archive</a>
+      </nav>
+    </div>
+    <HubBackLink />
+  </div>
+</header>

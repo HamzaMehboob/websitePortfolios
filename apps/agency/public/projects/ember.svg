@@ -1,0 +1,5 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'>
+  <rect width='800' height='600' fill='#1c1917' opacity='0.35'/>
+  <rect x='80' y='120' width='640' height='360' fill='#1c1917' opacity='0.5'/>
+  <text x='100' y='520' font-family='Georgia,serif' font-size='48' fill='#1c1917' opacity='0.6'>ember</text>
+</svg>

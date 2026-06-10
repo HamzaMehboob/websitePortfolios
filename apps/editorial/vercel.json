@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "installCommand": "cd ../.. && corepack enable && pnpm install",
+  "buildCommand": "cd ../.. && pnpm turbo build --filter=editorial",
+  "outputDirectory": "dist",
+  "ignoreCommand": "cd ../.. && pnpm exec turbo-ignore editorial"
+}

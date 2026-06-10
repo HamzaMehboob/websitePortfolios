@@ -1,0 +1,36 @@
+---
+title: "Accessible Motion for Product UI"
+description: "Motion guides attention — when it respects user preferences and cognitive load."
+pubDate: 2026-05-18
+author: Maya Chen
+authorSlug: maya-chen
+tags: [accessibility, ux]
+heroImage: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1200&h=750&fit=crop"
+featured: false
+---
+
+Motion is hierarchy. A drawer sliding in communicates context; a chart easing in signals causality. But motion without guardrails becomes noise.
+
+## Respect `prefers-reduced-motion`
+
+Provide instant state changes when users request reduced motion. Parallax, auto-playing loops, and scroll-jacking should degrade gracefully — not disappear essential feedback.
+
+## Duration and easing
+
+- **Micro-interactions:** 150–200ms
+- **Panel transitions:** 250–350ms
+- **Page-level:** avoid unless narratively essential
+
+Use ease-out for entrances, ease-in for exits. Linear easing feels mechanical; extreme bounce feels toy-like.
+
+### Focus management
+
+When modals open, trap focus and return it on close. Animate opacity in parallel — never delay focusability until animation completes.
+
+## Testing checklist
+
+1. Keyboard-only walkthrough with screen reader
+2. Reduced-motion snapshot tests
+3. Seizure-risk: no flashing > 3 Hz
+
+Motion should answer: *where did my attention go, and why?*

@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "@website-portfolios/ui-tokens/css";
+
+:root {
+  --pulse-primary: #0ea5e9;
+  --pulse-accent: #22c55e;
+  --pulse-chart-1: #0ea5e9;
+  --pulse-chart-2: #22c55e;
+  --pulse-chart-3: #f59e0b;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--neutral-50);
+  color: var(--neutral-900);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
