@@ -98,7 +98,9 @@ jobs:
         run: |
           test -f github-pages-dist/index.html
           test -f github-pages-dist/stars.js
+          test -f github-pages-dist/demos/hub.svg
           test -f github-pages-dist/demos/pulse.svg
+          test -f github-pages-dist/hub/index.html
           test -f github-pages-dist/pulse/index.html
           test -f github-pages-dist/agency/index.html
           test -f github-pages-dist/agency/projects/northlight.svg

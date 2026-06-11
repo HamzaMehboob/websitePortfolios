@@ -10,7 +10,7 @@ OUT="github-pages-dist"
 echo "Building GitHub Pages site for ${ORIGIN}${BASE}/"
 
 rm -rf "$OUT"
-mkdir -p "$OUT/pulse" "$OUT/agency" "$OUT/forma" "$OUT/habit" "$OUT/surface"
+mkdir -p "$OUT/hub" "$OUT/pulse" "$OUT/agency" "$OUT/forma" "$OUT/habit" "$OUT/surface"
 
 cp github-pages/index.html "$OUT/"
 cp github-pages/styles.css "$OUT/"
@@ -39,6 +39,7 @@ restore_og_image() {
 }
 
 cleanup_og_images() {
+  restore_og_image hub
   restore_og_image agency
   restore_og_image ecommerce
 }
@@ -50,6 +51,17 @@ export GITHUB_PAGES_ORIGIN="$ORIGIN"
 export NEXT_PUBLIC_HUB_URL="$HUB_URL"
 export VITE_HUB_URL="$HUB_URL"
 export PUBLIC_HUB_URL="$HUB_URL"
+export NEXT_PUBLIC_DEMO_PULSE_URL="${ORIGIN}${BASE}/pulse/"
+export NEXT_PUBLIC_DEMO_AGENCY_URL="${ORIGIN}${BASE}/agency/"
+export NEXT_PUBLIC_DEMO_FORMA_URL="${ORIGIN}${BASE}/forma/shop/"
+export NEXT_PUBLIC_DEMO_HABIT_URL="${ORIGIN}${BASE}/habit/"
+export NEXT_PUBLIC_DEMO_SURFACE_URL="${ORIGIN}${BASE}/surface/"
+
+echo "→ Building Portfolio Hub (Next.js static export)…"
+disable_og_image hub
+pnpm --filter hub build
+restore_og_image hub
+cp -r apps/hub/out/. "$OUT/hub/"
 
 echo "→ Building Pulse (Vite)…"
 pnpm --filter saas-dashboard build
