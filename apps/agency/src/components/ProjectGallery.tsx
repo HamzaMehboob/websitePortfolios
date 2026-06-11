@@ -18,8 +18,11 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         className="max-h-[90vh] w-full max-w-2xl overflow-y-auto bg-[#faf9f7] p-6 sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative mb-6 aspect-[16/10] w-full overflow-hidden bg-stone-200">
-          <Image src={project.image} alt="" fill className="object-cover" />
+        <div
+          className="relative mb-6 aspect-[16/10] w-full overflow-hidden"
+          style={{ background: `linear-gradient(135deg, ${project.accent}44, #faf9f7)` }}
+        >
+          <Image src={project.image} alt="" fill className="object-contain p-6" />
         </div>
         <p className="text-xs uppercase tracking-[0.25em] text-stone-500">
           {project.category} · {project.year}
@@ -78,12 +81,16 @@ export function ProjectGallery() {
             onClick={() => setSelected(project)}
             className="group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-400"
           >
-            <div className="relative aspect-[4/3] overflow-hidden bg-stone-200">
+            <div
+              className="relative aspect-[4/3] overflow-hidden rounded-sm shadow-sm ring-1 ring-stone-200/80"
+              style={{ background: `linear-gradient(145deg, ${project.accent}55 0%, #faf9f7 60%)` }}
+            >
               <Image
                 src={project.image}
                 alt=""
                 fill
-                className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                className="object-contain p-5 transition duration-500 group-hover:scale-[1.03]"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
             <p className="mt-4 text-xs uppercase tracking-[0.2em] text-stone-500">{project.category}</p>
