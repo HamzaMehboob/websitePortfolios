@@ -14,6 +14,7 @@ mkdir -p "$OUT/pulse" "$OUT/agency" "$OUT/forma" "$OUT/habit" "$OUT/surface"
 
 cp github-pages/index.html "$OUT/"
 cp github-pages/styles.css "$OUT/"
+cp github-pages/stars.js "$OUT/"
 mkdir -p "$OUT/demos"
 cp apps/hub/public/demos/*.svg "$OUT/demos/"
 touch "$OUT/.nojekyll"

@@ -25,8 +25,9 @@
     </header>
 
     <main id="main-content">
-      <div class="container">
-        <section id="demos" aria-labelledby="demos-heading">
+      <section id="demos" class="demos-section" aria-labelledby="demos-heading">
+        <div id="stars-layer" class="stars-layer" aria-hidden="true"></div>
+        <div class="container demos-content">
           <h2 id="demos-heading" class="section-title">Portfolio demos</h2>
           <p class="section-desc">
             Click any project card to open the demo. Each site includes a link back to this hub.
@@ -113,8 +114,8 @@
               </div>
             </a>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -122,5 +123,6 @@
         <p>Built with Next.js, React, Flutter, and Astro — deployed on GitHub Pages.</p>
       </div>
     </footer>
+    <script src="stars.js"></script>
   </body>
 </html>

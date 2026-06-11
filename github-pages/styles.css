@@ -99,7 +99,98 @@ body {
 }
 
 main {
+  padding: 0;
+}
+
+.demos-section {
+  position: relative;
+  overflow: hidden;
   padding: 3rem 0 4rem;
+  background: linear-gradient(165deg, #020617 0%, #0f172a 35%, #1e1b4b 65%, #0f172a 100%);
+}
+
+.demos-content {
+  position: relative;
+  z-index: 1;
+}
+
+.demos-section .section-title {
+  color: #f1f5f9;
+}
+
+.demos-section .section-desc {
+  color: #94a3b8;
+}
+
+.stars-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.shooting-star {
+  position: absolute;
+  width: 6rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.15), rgb(147 197 253 / 0.95), rgb(255 255 255 / 0.4));
+  border-radius: 9999px;
+  transform: rotate(-35deg);
+  opacity: 0;
+  animation: shooting-star linear infinite;
+  box-shadow: 0 0 12px rgb(147 197 253 / 0.45);
+}
+
+.star-dot {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.75);
+  animation: star-twinkle 3s ease-in-out infinite;
+}
+
+@keyframes shooting-star {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-35deg);
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  18% {
+    transform: translate3d(18vw, 12vh, 0) rotate(-35deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(18vw, 12vh, 0) rotate(-35deg);
+    opacity: 0;
+  }
+}
+
+@keyframes star-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.35);
+  }
+}
+
+.stars-paused .shooting-star,
+.stars-paused .star-dot {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shooting-star,
+  .star-dot {
+    display: none;
+  }
 }
 
 .section-title {
@@ -119,6 +210,19 @@ main {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+}
+
+.demos-section .card {
+  background: rgb(255 255 255 / 0.97);
+  border-color: rgb(255 255 255 / 0.12);
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.25);
+}
+
+@media (prefers-color-scheme: dark) {
+  .demos-section .card {
+    background: rgb(23 23 23 / 0.92);
+    border-color: rgb(255 255 255 / 0.1);
+  }
 }
 
 .card {
