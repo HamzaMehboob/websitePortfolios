@@ -4,8 +4,9 @@
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const shootingCount = 16;
-  const dotCount = 48;
+  const isMobile = window.matchMedia("(max-width: 640px)").matches;
+  const shootingCount = isMobile ? 8 : 16;
+  const dotCount = isMobile ? 24 : 48;
 
   for (let i = 0; i < shootingCount; i++) {
     const star = document.createElement("span");
@@ -27,10 +28,23 @@
     layer.appendChild(dot);
   }
 
-  function pauseStars() {
-    layer.classList.add("stars-paused");
-    document.removeEventListener("click", pauseStars, true);
+  const toggle = document.getElementById("stars-toggle");
+
+  function setPaused(paused) {
+    layer.classList.toggle("stars-paused", paused);
+    if (toggle) {
+      toggle.setAttribute("aria-pressed", String(paused));
+      toggle.textContent = paused ? "Play stars" : "Pause motion";
+    }
   }
 
-  document.addEventListener("click", pauseStars, true);
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      setPaused(!layer.classList.contains("stars-paused"));
+    });
+  }
+
+  document.querySelectorAll("#demos .card-link").forEach((card) => {
+    card.addEventListener("click", () => setPaused(true));
+  });
 })();

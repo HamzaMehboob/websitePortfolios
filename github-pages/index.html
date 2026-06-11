@@ -16,40 +16,63 @@
     <header class="hero">
       <div class="container">
         <p class="eyebrow">UI/UX · Frontend</p>
-        <h1>Portfolio Hub</h1>
-        <p>
-          Six distinct frontends, one narrative — hub, SaaS, agency, commerce, mobile, and editorial.
-        </p>
+        <h1>Demo launcher</h1>
+        <p>Six frontends. One hub. Open the full portfolio for case studies, or jump into a live demo below.</p>
       </div>
     </header>
+
+    <div class="hero-bridge" aria-hidden="true"></div>
 
     <main id="main-content">
       <section id="demos" class="demos-section" aria-labelledby="demos-heading">
         <div id="stars-layer" class="stars-layer" aria-hidden="true"></div>
         <div class="container demos-content">
-          <h2 id="demos-heading" class="section-title">Portfolio demos</h2>
-          <p class="section-desc">
-            Six projects below — click any card to explore. Each spoke includes a link back here.
-          </p>
+          <div class="demos-header">
+            <div>
+              <h2 id="demos-heading" class="section-title">Portfolio demos</h2>
+              <p class="section-desc">
+                Six projects — click a card to explore. Each spoke links back here when you are done.
+              </p>
+            </div>
+            <button
+              type="button"
+              id="stars-toggle"
+              class="stars-toggle"
+              aria-pressed="false"
+              aria-controls="stars-layer"
+            >
+              Pause motion
+            </button>
+          </div>
 
           <div class="grid">
-            <a class="card card-link" href="hub/">
+            <a
+              class="card card-link"
+              href="hub/"
+              data-accent="hub"
+              aria-label="Open Full Portfolio — case studies and work writeups"
+            >
               <div class="card-thumb">
                 <img src="demos/hub.svg" alt="" />
               </div>
               <div class="card-body">
-                <h2>Portfolio Hub</h2>
-                <p>Flagship site with case studies, work writeups, about, and demo launcher.</p>
+                <h2>Full Portfolio</h2>
+                <p>Case studies, work writeups, about, and the inner demo hub.</p>
                 <div class="tags">
                   <span class="tag">Next.js</span>
                   <span class="tag">Framer Motion</span>
                   <span class="tag">shadcn/ui</span>
                 </div>
-                <span class="btn">View demo</span>
+                <span class="card-cta">Open portfolio</span>
               </div>
             </a>
 
-            <a class="card card-link" href="pulse/">
+            <a
+              class="card card-link"
+              href="pulse/"
+              data-accent="pulse"
+              aria-label="Open Pulse SaaS demo"
+            >
               <div class="card-thumb">
                 <img src="demos/pulse.svg" alt="" />
               </div>
@@ -61,11 +84,16 @@
                   <span class="tag">Vite</span>
                   <span class="tag">TanStack Query</span>
                 </div>
-                <span class="btn">View demo</span>
+                <span class="card-cta">View demo</span>
               </div>
             </a>
 
-            <a class="card card-link" href="agency/">
+            <a
+              class="card card-link"
+              href="agency/"
+              data-accent="agency"
+              aria-label="Open Atelier North agency demo"
+            >
               <div class="card-thumb">
                 <img src="demos/agency.svg" alt="" />
               </div>
@@ -77,11 +105,16 @@
                   <span class="tag">GSAP</span>
                   <span class="tag">Tailwind</span>
                 </div>
-                <span class="btn">View demo</span>
+                <span class="card-cta">View demo</span>
               </div>
             </a>
 
-            <a class="card card-link" href="forma/shop/">
+            <a
+              class="card card-link"
+              href="forma/shop/"
+              data-accent="forma"
+              aria-label="Open Forma Shop e-commerce demo"
+            >
               <div class="card-thumb">
                 <img src="demos/ecommerce.svg" alt="" />
               </div>
@@ -93,11 +126,16 @@
                   <span class="tag">Zustand</span>
                   <span class="tag">Tailwind</span>
                 </div>
-                <span class="btn">View demo</span>
+                <span class="card-cta">View demo</span>
               </div>
             </a>
 
-            <a class="card card-link" href="habit/">
+            <a
+              class="card card-link"
+              href="habit/"
+              data-accent="habit"
+              aria-label="Open Habit App Flutter demo"
+            >
               <div class="card-thumb">
                 <img src="demos/habit.svg" alt="" />
               </div>
@@ -109,11 +147,16 @@
                   <span class="tag">Riverpod</span>
                   <span class="tag">Material 3</span>
                 </div>
-                <span class="btn">View demo</span>
+                <span class="card-cta">View demo</span>
               </div>
             </a>
 
-            <a class="card card-link" href="surface/">
+            <a
+              class="card card-link"
+              href="surface/"
+              data-accent="surface"
+              aria-label="Open Surface Mag editorial demo"
+            >
               <div class="card-thumb">
                 <img src="demos/editorial.svg" alt="" />
               </div>
@@ -125,7 +168,7 @@
                   <span class="tag">MDX</span>
                   <span class="tag">Tailwind</span>
                 </div>
-                <span class="btn">View demo</span>
+                <span class="card-cta">View demo</span>
               </div>
             </a>
           </div>
@@ -134,8 +177,13 @@
     </main>
 
     <footer>
-      <div class="container">
-        <p>Built with Next.js, React, Flutter, and Astro — deployed on GitHub Pages.</p>
+      <div class="container footer-inner">
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="hub/">Full portfolio</a>
+          <a href="hub/work/">Work</a>
+          <a href="hub/contact/">Contact</a>
+        </nav>
+        <p class="footer-note">Built with Next.js, React, Flutter, and Astro — deployed on GitHub Pages.</p>
       </div>
     </footer>
     <script src="stars.js"></script>

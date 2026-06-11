@@ -29,8 +29,9 @@ export function DemoCard({ demo }: { demo: PortfolioDemo }) {
           ))}
         </div>
         {isLive ? (
-          <span className="inline-flex h-10 w-full items-center justify-center rounded-md bg-blue-600 px-4 text-sm font-medium text-white group-hover:bg-blue-700 group-focus-visible:bg-blue-700">
-            View Demo
+          <span className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 transition-transform group-hover:translate-x-0.5 dark:text-blue-400">
+            View demo
+            <span aria-hidden="true">→</span>
           </span>
         ) : (
           <Button disabled className="w-full" aria-disabled="true">

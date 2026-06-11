@@ -9,7 +9,7 @@ export function PortfolioDemos({ title = "Portfolio Demos" }: { title?: string }
           {title}
         </h2>
         <p className="mt-2 max-w-2xl text-neutral-600 dark:text-neutral-400">
-          Explore five spoke demos across React, Next.js, Flutter, and Astro — plus this hub, six sites in total.
+          Six live demos across React, Next.js, Flutter, and Astro — click any card to explore.
         </p>
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
