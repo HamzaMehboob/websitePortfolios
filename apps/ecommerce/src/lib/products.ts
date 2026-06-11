@@ -1,3 +1,5 @@
+import { publicAsset } from "@/lib/assets";
+
 export type Category = "furniture" | "lighting" | "textiles" | "decor";
 
 export interface Review {
@@ -28,7 +30,7 @@ const base = (id: string, name: string, category: Category, price: number, desc:
   category,
   price,
   description: desc,
-  images: [`/products/${id}.svg`, `/products/${id}-2.svg`],
+  images: [publicAsset(`/products/${id}.svg`), publicAsset(`/products/${id}-2.svg`)],
   sizes: category === "furniture" || category === "textiles" ? ["S", "M", "L"] : undefined,
   rating: 4.2 + (id.length % 8) * 0.1,
   reviewCount: 12 + (id.length % 20),

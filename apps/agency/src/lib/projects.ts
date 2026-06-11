@@ -1,3 +1,5 @@
+import { publicAsset } from "@/lib/assets";
+
 export type ProjectCategory = "branding" | "digital" | "spatial";
 
 export interface Project {
@@ -26,7 +28,7 @@ export const projects: Project[] = [
     category: "branding",
     year: 2025,
     description: "Identity system for a Scandinavian lighting manufacturer — wordmark, packaging, and art direction.",
-    image: "/projects/northlight.svg",
+    image: publicAsset("/projects/northlight.svg"),
     accent: "#a8a29e",
   },
   {
@@ -36,7 +38,7 @@ export const projects: Project[] = [
     category: "branding",
     year: 2024,
     description: "Luxury hospitality brand with editorial typography and tactile print applications.",
-    image: "/projects/maison.svg",
+    image: publicAsset("/projects/maison.svg"),
     accent: "#78716c",
   },
   {
@@ -46,7 +48,7 @@ export const projects: Project[] = [
     category: "digital",
     year: 2025,
     description: "Investor portal UX with data-forward layouts and restrained motion.",
-    image: "/projects/atlas.svg",
+    image: publicAsset("/projects/atlas.svg"),
     accent: "#57534e",
   },
   {
@@ -56,7 +58,7 @@ export const projects: Project[] = [
     category: "digital",
     year: 2024,
     description: "Reading-first magazine site with custom CMS templates and subscription funnel.",
-    image: "/projects/tide.svg",
+    image: publicAsset("/projects/tide.svg"),
     accent: "#44403c",
   },
   {
@@ -66,7 +68,7 @@ export const projects: Project[] = [
     category: "spatial",
     year: 2025,
     description: "Wayfinding and exhibition graphics for a contemporary art space.",
-    image: "/projects/folio.svg",
+    image: publicAsset("/projects/folio.svg"),
     accent: "#292524",
   },
   {
@@ -76,7 +78,7 @@ export const projects: Project[] = [
     category: "spatial",
     year: 2023,
     description: "Coworking environment — signage, environmental graphics, and brand touchpoints.",
-    image: "/projects/ember.svg",
+    image: publicAsset("/projects/ember.svg"),
     accent: "#1c1917",
   },
   {
@@ -86,7 +88,7 @@ export const projects: Project[] = [
     category: "digital",
     year: 2024,
     description: "Wellness app UI system with calm palettes and accessible component library.",
-    image: "/projects/lumen.svg",
+    image: publicAsset("/projects/lumen.svg"),
     accent: "#d6d3d1",
   },
   {
@@ -96,7 +98,7 @@ export const projects: Project[] = [
     category: "branding",
     year: 2023,
     description: "Property development brand balancing heritage cues with modern minimalism.",
-    image: "/projects/haven.svg",
+    image: publicAsset("/projects/haven.svg"),
     accent: "#a8a29e",
   },
 ];

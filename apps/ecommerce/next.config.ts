@@ -8,6 +8,9 @@ const basePath = isGitHubPages ? `/${repo}/forma` : "";
 const nextConfig: NextConfig = {
   transpilePackages: ["@website-portfolios/ui-tokens"],
   outputFileTracingRoot: path.join(process.cwd(), "../.."),
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   ...(isGitHubPages && {
     output: "export",
     basePath,
