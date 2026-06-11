@@ -152,14 +152,16 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 0.75rem;
   background: linear-gradient(135deg, var(--border), transparent);
 }
 
 .card-thumb img {
-  max-width: 55%;
-  height: auto;
-  opacity: 0.92;
+  width: 88%;
+  height: 88%;
+  max-width: 14rem;
+  object-fit: contain;
+  opacity: 0.95;
 }
 
 .card-body {

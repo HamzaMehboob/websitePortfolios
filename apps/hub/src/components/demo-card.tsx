@@ -11,7 +11,7 @@ export function DemoCard({ demo }: { demo: PortfolioDemo }) {
   const inner = (
     <>
       <div className="relative aspect-[16/10] bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-900 dark:to-neutral-800">
-        <Image src={demo.thumbnail} alt="" fill className="object-cover p-6 opacity-90" />
+        <Image src={demo.thumbnail} alt="" fill className="object-contain p-3 opacity-95" sizes="(max-width: 768px) 100vw, 33vw" />
       </div>
       <CardHeader>
         <CardTitle>{demo.name}</CardTitle>
