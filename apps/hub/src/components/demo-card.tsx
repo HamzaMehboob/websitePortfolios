@@ -8,8 +8,8 @@ export function DemoCard({ demo }: { demo: PortfolioDemo }) {
   const url = getDemoUrl(demo);
   const isLive = demo.status === "live" && url;
 
-  return (
-    <Card className="flex h-full flex-col overflow-hidden">
+  const inner = (
+    <>
       <div className="relative aspect-[16/10] bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-900 dark:to-neutral-800">
         <Image src={demo.thumbnail} alt="" fill className="object-cover p-6 opacity-90" />
       </div>
@@ -29,20 +29,33 @@ export function DemoCard({ demo }: { demo: PortfolioDemo }) {
           ))}
         </div>
         {isLive ? (
-          <Link
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-10 w-full items-center justify-center rounded-md bg-blue-600 px-4 text-sm font-medium text-white hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-          >
+          <span className="inline-flex h-10 w-full items-center justify-center rounded-md bg-blue-600 px-4 text-sm font-medium text-white group-hover:bg-blue-700 group-focus-visible:bg-blue-700">
             View Demo
-          </Link>
+          </span>
         ) : (
           <Button disabled className="w-full" aria-disabled="true">
             Coming soon
           </Button>
         )}
       </CardContent>
-    </Card>
+    </>
   );
+
+  if (isLive) {
+    return (
+      <Link
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group block h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+        aria-label={`Open ${demo.name} demo`}
+      >
+        <Card className="flex h-full flex-col overflow-hidden transition-shadow group-hover:shadow-md">
+          {inner}
+        </Card>
+      </Link>
+    );
+  }
+
+  return <Card className="flex h-full flex-col overflow-hidden">{inner}</Card>;
 }

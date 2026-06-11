@@ -97,8 +97,9 @@ jobs:
       - name: Assert hub and demo paths exist
         run: |
           test -f github-pages-dist/index.html
+          test -f github-pages-dist/demos/pulse.svg
           test -f github-pages-dist/pulse/index.html
           test -f github-pages-dist/agency/index.html
-          test -f github-pages-dist/forma/index.html
+          test -f github-pages-dist/forma/shop/index.html
           test -f github-pages-dist/habit/index.html
           test -f github-pages-dist/surface/index.html

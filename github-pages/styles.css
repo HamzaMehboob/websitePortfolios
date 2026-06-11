@@ -131,8 +131,20 @@ main {
   transition: box-shadow 0.2s ease;
 }
 
-.card:hover {
+.card-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.card-link:hover,
+.card-link:focus-visible {
   box-shadow: 0 4px 24px rgb(0 0 0 / 8%);
+}
+
+.card-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .card-thumb {
@@ -140,8 +152,14 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  padding: 1.5rem;
   background: linear-gradient(135deg, var(--border), transparent);
+}
+
+.card-thumb img {
+  max-width: 55%;
+  height: auto;
+  opacity: 0.92;
 }
 
 .card-body {
